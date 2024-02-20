@@ -1,0 +1,125 @@
+/*
+ * Globals
+ */
+ body {
+  color: #1CD6CE !important;
+  background-color: #C4D7E0 !important;
+}
+
+
+@media (min-width: 768px) {
+  .bd-placeholder-img-lg {
+    position: static;
+    font-size: 3.5rem;
+  }
+}
+
+
+/* Custom default button */
+.btn-secondary,
+.btn-secondary:hover,
+.btn-secondary:focus {
+  color: #FCE2DB;
+  text-shadow: none; /* Prevent inheritance from `body` */
+}
+.float{
+  position: relative;
+right: 50px;
+  padding-top: 4rem;
+}
+
+
+/*
+ * Base structure
+ */
+
+
+.cover-container {
+  max-width: 42em;
+}
+
+
+/*
+ * Header
+ */
+
+/* .nav-masthead .nav-link {
+  position: relative;
+  left: 400px;
+  padding: .2rem 0;
+  font-weight: 700;
+  color: #FCE2DB;
+  background-color: transparent;
+  border-bottom: .25rem;
+} */
+
+/* .nav-masthead .nav-link:hover .nav-link active,
+.nav-masthead .nav-link:focus {
+  border-bottom-color: #FCE2DB(255, 255, 255, .25);
+} */
+/* 
+.nav-masthead .nav-link + .nav-link {
+  margin-left: 0.5rem;
+} */
+
+.nav-masthead .active {
+  background-color: transparent;
+
+  color: #FCE2DB;
+ 
+}
+.title_name
+{
+  font-family: "Montserrat";
+  font-size: 2.75rem;
+  position: relative;
+  right: 80%;
+ bottom: 140%;
+}
+.nav-link{
+  color: #1CD6CE;
+  position: relative;
+  left: 100%;
+  font-weight: 700;
+ bottom: 10%;
+  border-bottom: .25rem
+}
+.header{
+  position: absolute;
+  min-height: 100vh;
+  width: 150%;
+  background-image: linear-gradient(rgba(4,9,30,0.7),rgba(4,9,30,0.7)),url(images/black.jpg);
+  background-position: center;
+  background-size: cover;
+  position: relative;
+}
+
+.content_upload{
+  position: relative;
+  right: 60%;
+  bottom: 2%;
+}
+.skinnovation{
+  font-family: "Montserrat";
+  font-size: 2.75rem;
+  position: relative;
+  right: 75%;
+ bottom: 5%;
+ position: relative;
+padding-top: 3%;
+}
+.logo{
+  position: relative;
+  left: 70%;
+  bottom: 30%;
+}
+.four_elements{
+  position: relative;
+  bottom: 40% !important;
+  right: 10%;
+}
+.col-7{
+position: relative;
+left: 47%;
+padding-top: 5%;
+}

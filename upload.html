@@ -1,0 +1,142 @@
+<html lang="en" class="h-100">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="" />
+  <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors" />
+  <meta name="generator" content="Hugo 0.88.1" />
+  <title>Upload | Skinnovation
+  </title>
+
+  <!-- FONT AWESOME -->
+  <script src="https://kit.fontawesome.com/fef27401dc.js" crossorigin="anonymous"></script>
+  
+  <!-- Bootstrap core CSS -->
+<!-- CSS only -->
+<link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/cover/" />
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+
+<!-- FONTS -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@900&family=Ubuntu&display=swap" rel="stylesheet">
+
+
+  
+
+  <!-- <style>
+    .bd-placeholder-img {
+      font-size: 1.125rem;
+      text-anchor: middle;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      user-select: none;
+    }
+
+    @media (min-width: 768px) {
+      .bd-placeholder-img-lg {
+        font-size: 3.5rem;
+      }
+    }
+  </style> -->
+
+  <!-- Custom styles for this template -->
+  <link href="cssfile.css" rel="stylesheet" />
+</head>
+
+<body class="d-flex h-100 text-center text-white bg-dark">
+  <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+    <header class="mb-auto">
+      <div>
+        <h1 class="skinnovation">SKINNOVATION</h1>
+
+        <div class="four_elements">
+          <nav class="nav nav-masthead justify-content-center float-md-end">
+            <a class="nav-link"  href="index.html">Home</a>
+            <a class="nav-link" aria-current="page"  href="#">Upload</a>
+            <a class="nav-link" href="contactindex.html">Contact</a>
+            <a class="nav-link" href="about.HTML">About Us</a>
+          </nav>
+        </div>
+      </div>
+    </header>
+    <div class="content_upload">
+      <main class="px-3">
+    
+        <p class="lead">
+          Determining your skin type is absolutely necessary to ensure proper care and treatment of your skin.<br>
+
+        </p>
+        <div class="row">
+          <div class="col-6">
+            <input id="image-selector" class="form-control border-0" type="file" />
+          </div>
+          <div class="col-6">
+            <button id="predict-button" class="btn btn-light float-right">
+              <a class="predict" href="images/skin_prediction.png">
+                Predict </a>
+            </button>
+          </div>
+          <div class="col-7">
+            <button id="predict-button" class="btn btn-light float-right">
+              <a class="predict2" href="hospital-website-template/index.html">
+                Schedule an appointment </a>
+            </button>
+          </div>
+        </div>
+        <hr />
+        <div class="row">
+          <div class="col-6">
+            <h2 class="ml-3">Image</h2>
+            <img id="selected-image" class="ml-3" width="250" alt="" />
+          </div>
+          <div class="col-6">
+            <h2 class="ml-3"> Predictions</h2>
+            <ol id="prediction-list"></ol>
+          </div>
+        </div>
+    </div>
+    
+    <div class="logo">
+      <img src="images/LOGOMAIN.jpg" width="350px" height="350px">
+    </div>
+
+
+    <!-- CAROUSEL END!! -->
+    <script src="predict.js"></script>
+    <script src="target_classes.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@2.0.0/dist/tf.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.3.1/dist/tf.min.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@0.8.3/dist/teachablemachine-image.min.js"></script>
+    <!-- <script type="text/javascript">
+            // More API functions here:
+            // https://github.com/googlecreativelab/teachablemachine-community/tree/master/libraries/image
+
+            // the link to your model provided by Teachable Machine export panel
+            const URL =
+              "https://teachablemachine.withgoogle.com/models/Yl3Z0YMy2/";
+        </script> -->
+    </main>
+
+    <footer class="mt-auto text-white-50">
+      <p>Made with ❤️ by Tensor Titans, SVIT</p>
+    </footer>
+  </div>
+</body>
+
+</html>
+
+<!--  <div>
+          <nav class="nav nav-masthead justify-content-center float-md-end">
+            <a class="nav-link" aria-current="page" href="index.html">Home</a>
+            <a class="nav-link" href="#">Upload</a>
+            <a class="nav-link" href="contactindex.html">Contact</a>
+            <a class="nav-link" href="#">About Us</a>
+          </nav>
+        </div> -->
+
+        <!-- text-center -->

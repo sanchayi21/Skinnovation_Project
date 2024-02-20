@@ -1,0 +1,251 @@
+<html lang="en" class="h-100">
+
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+  <meta name="generator" content="Hugo 0.88.1">
+
+
+  <!-- FONT AWESOME -->
+  <script src="https://kit.fontawesome.com/fef27401dc.js" crossorigin="anonymous"></script>
+
+
+  <!-- Custom styles for this template -->
+  <link href="cssfile.css" rel="stylesheet"/>
+
+
+  <!-- TITLE -->
+  <title>SKINNOVATION</title>
+
+  <!-- FAVICON -->
+  <link rel="icon" href="favicon.ico">
+
+
+  <!-- FONTS -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@900&family=Ubuntu&display=swap" rel="stylesheet">
+
+  <!-- BOOTSTRAPS -->
+  <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/cover/">
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+
+
+
+  <!-- <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style> -->
+
+
+</head>
+
+<body class="d-flex h-100 text-center" data-new-gr-c-s-check-loaded="14.1004.0" data-gr-ext-installed="" -->
+
+  <section class="header">
+    <nav>
+
+      <div class="nav-links" id="navLinks">
+        <i class="fa-solid fa-xmark" onclick="hidemenu()"></i>
+        <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+          <header class="mb-auto">
+
+            <div>
+              <nav class="nav nav-masthead justify-content-center float-md-end">
+                <a class="nav-link" aria-current="page" href="#">Home</a>
+                <a class="nav-link" href="upload.html">Upload</a>
+                <a class="nav-link" href="contactindex.html">Contact</a>
+                <a class="nav-link" href="about.HTML">About Us</a>
+              </nav>
+            </div>
+          </header>
+
+          <main class="px-3">
+            <h1 class="title_name">SKINNOVATION</h1>
+            <p class="lead">
+              Machine Learning & Neural Network based algorithm to detect dermatosis
+              at earlier stage to prevent any further complications.
+            </p>
+            <p class="lead">
+              <!-- <a
+            href="#"
+            class="btn btn-lg btn-secondary fw-bold border-white bg-white"
+            >Learn more</a
+          > -->
+            </p>
+            <div id="webcam-container"></div>
+            <div id="label-container"></div>
+            <button type="button" onclick="init()">Start</button>
+            <div id="webcam-container"></div>
+            <div id="label-container"></div>
+            <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.3.1/dist/tf.min.js"></script>
+            <script
+              src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@0.8.3/dist/teachablemachine-image.min.js"></script>
+            <script type="text/javascript">
+              // More API functions here:
+              // https://github.com/googlecreativelab/teachablemachine-community/tree/master/libraries/image
+
+              // the link to your model provided by Teachable Machine export panel
+              const URL =
+                "https://teachablemachine.withgoogle.com/models/Yl3Z0YMy2/";
+
+              let model, webcam, labelContainer, maxPredictions;
+
+              const modelURL = URL + "model.json";
+              const metadataURL = URL + "metadata.json";
+
+              let isIos = false;
+              // fix when running demo in ios, video will be frozen;
+              if (
+                window.navigator.userAgent.indexOf("iPhone") > -1 ||
+                window.navigator.userAgent.indexOf("iPad") > -1
+              ) {
+                isIos = true;
+              }
+              // Load the image model and setup the webcam
+              async function init() {
+                const modelURL = URL + "model.json";
+                const metadataURL = URL + "metadata.json";
+
+                // load the model and metadata
+                // Refer to tmImage.loadFromFiles() in the API to support files from a file picker
+                // or files from your local hard drive
+                model = await tmImage.load(modelURL, metadataURL);
+                maxPredictions = model.getTotalClasses();
+
+                // Convenience function to setup a webcam
+                const flip = true; // whether to flip the webcam
+                const width = 200;
+                const height = 200;
+                webcam = new tmImage.Webcam(width, height, flip);
+                await webcam.setup(); // request access to the webcam
+
+                if (isIos) {
+                  document
+                    .getElementById("webcam-container")
+                    .appendChild(webcam.webcam); // webcam object needs to be added in any case to make this work on iOS
+                  // grab video-object in any way you want and set the attributes
+                  const webCamVideo = document.getElementsByTagName("video")[1];
+                  webCamVideo.setAttribute("playsinline", true); // written with "setAttribute" bc. iOS buggs otherwise
+                  webCamVideo.muted = "true";
+                  webCamVideo.style.width = width + "px";
+                  webCamVideo.style.height = height + "px";
+                } else {
+                  document
+                    .getElementById("webcam-container")
+                    .appendChild(webcam.canvas);
+                }
+                // append elements to the DOM
+                labelContainer = document.getElementById("label-container");
+                for (let i = 0; i < maxPredictions; i++) {
+                  // and class labels
+                  labelContainer.appendChild(document.createElement("div"));
+                }
+                webcam.play();
+                window.requestAnimationFrame(loop);
+              }
+
+              async function loop() {
+                webcam.update(); // update the webcam frame
+                await predict();
+                window.requestAnimationFrame(loop);
+              }
+
+              // run the webcam image through the image model
+              async function predict() {
+                // predict can take in an image, video or canvas html element
+                let prediction;
+                if (isIos) {
+                  prediction = await model.predict(webcam.webcam);
+                } else {
+                  prediction = await model.predict(webcam.canvas);
+                }
+                for (let i = 0; i < maxPredictions; i++) {
+                  const classPrediction =
+                    prediction[i].className +
+                    ": " +
+                    prediction[i].probability.toFixed(2);
+                  labelContainer.childNodes[i].innerHTML = classPrediction;
+                }
+              }
+          //my name is antony
+
+          // let video;
+          // let flippedVideo;
+          // // To store the classification
+          // let label = "";
+
+          // // Load the model first
+          // function preload() {
+          //   classifier = ml5.imageClassifier(imageModelURL + "model.json");
+          // }
+
+          // function setup() {
+          //   createCanvas(320, 280);
+          //   // Create the video
+          //   video = createCapture(VIDEO);
+          //   video.size(320, 240);
+          //   video.hide();
+
+          //   flippedVideo = ml5.flipImage(video);
+          //   // Start classifying
+          //   classifyVideo();
+          // }
+
+          // function draw() {
+          //   background(0);
+          //   // Draw the video
+          //   image(flippedVideo, 0, 0);
+
+          //   // Draw the label
+          //   fill(255);
+          //   textSize(16);
+          //   textAlign(CENTER);
+          //   text(label, width / 2, height - 4);
+          // }
+
+          // function classifyVideo() {
+          //   flippedVideo = ml5.flipImage(video);
+          //   classifier.classify(flippedVideo, gotResult);
+          //   flippedVideo.remove();
+          // }
+
+          // // When we get a result
+          // function gotResult(error, results) {
+          //   // If there is an error
+          //   if (error) {
+          //     console.error(error);
+          //     return;
+          //   }
+          //   // The results are in an array ordered by confidence.
+          //   // console.log(results[0]);
+          //   label = results[0].label;
+          //   // Classifiy again!
+          //   classifyVideo();
+          // }
+            </script>
+          </main>
+
+          <footer class="mt-auto text-light">
+            <p>Made with ❤️ by Tensor Titans,SVIT</p>
+          </footer>
+        </div>
+</body>
+
+</html>
